@@ -43,6 +43,35 @@ bool findNumberIn2DArray(vector<vector<int>>& matrix, int target) {
 
 	}
 	return false;
-
-
 }
+
+//替换空格
+string replaceSpace(string s) {
+	int l1 = s.size();
+	for(int i=0;i<l1;i++){
+		if (s[i] == ' '){
+			s+="00";
+		}
+	}
+	int l2 = s.size();
+	if (l2<=l1){
+		return s;
+
+	}
+	l2--;
+	for(int i=l1-1;i>=0;i--){
+		char t = s[i];
+		if (t == ' '){
+			s[l2--]= '0';
+			s[l2--]= '2';
+			s[l2--]= '%';
+
+		}else{
+			s[l2--]= t;
+
+		}
+
+	}
+	return s;
+}
+
