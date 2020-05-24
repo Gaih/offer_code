@@ -6,4 +6,4 @@ cmake_minimum_required (VERSION 3.8)
 project ("offer_code")
 
 # 包含子项目。
-add_executable("offer_code" "main.cpp")
+add_executable("offer_code" "Code.cpp" "main.cpp")
