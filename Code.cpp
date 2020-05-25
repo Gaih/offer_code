@@ -1,4 +1,6 @@
 #include "offer_code.h"
+#include <cstddef>
+#include <stack>
 
 
 
@@ -73,5 +75,28 @@ string replaceSpace(string s) {
 
 	}
 	return s;
+}
+
+struct ListNode {
+	int val;
+	ListNode * next;
+	ListNode(int x): val(x),next(NULL){}
+
+};
+//从尾到头打印链表
+vector<int> reversePrint(ListNode* head) {
+	vector<int> num;
+	stack<ListNode*> sNode;
+	while (head !=NULL){
+		sNode.push(head);
+		head = head->next;
+	}
+	while(!sNode.empty()){
+		ListNode* t = sNode.top();
+		num.push_back(t->val);
+		sNode.pop();
+
+	}
+	return num;
 }
 
