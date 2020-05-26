@@ -100,3 +100,16 @@ vector<int> reversePrint(ListNode* head) {
 	return num;
 }
 
+//反转链表
+ListNode* revertListNode(ListNode * head){
+
+	ListNode* revert = NULL;
+	ListNode* node = head;
+	while(node->next != NULL){
+		ListNode* temp = node->next;
+		node->next = revert;
+		revert = node;
+		node = temp;
+	}
+	return revert;
+}
