@@ -1,5 +1,6 @@
 #include "offer_code.h"
 #include <cstddef>
+#include <map>
 #include <stack>
 
 
@@ -112,4 +113,33 @@ ListNode* revertListNode(ListNode * head){
 		node = temp;
 	}
 	return revert;
+}
+
+
+//重建二叉树
+TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+	map<int, int> indexMap;
+	int size = inorder.size();
+	for (int i =0; i<size; i++) {
+		indexMap[inorder[i]] = i;
+	}
+	return build(preorder,0,size,inorder,0,size,indexMap);
+}
+
+
+TreeNode* build(vector<int>& preorder,int pl,int pr, vector<int>& inorder,int il,int ir,map<int, int>& indexMap ) {
+	cout<<pl<<":"<<pr<<"-"<<il<<":"<<ir<<endl;
+	if(pl==pr){
+		return NULL;
+	}
+	int root = preorder[pl];
+	TreeNode* tree = new TreeNode(root);
+	tree->left = NULL;
+	tree->right= NULL;
+	int index = indexMap[root];
+	int num = index - il;
+	tree->left = build(preorder,pl+1,pl+num+1,inorder,il,index,indexMap);
+	tree->right = build(preorder,pl+num+1,pr,inorder,index+1,ir,indexMap);
+	return tree;
+
 }
