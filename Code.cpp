@@ -1,9 +1,5 @@
 #include "offer_code.h"
-#include <cstddef>
-#include <map>
 #include <stack>
-
-
 
 //数组中重复的数字
 int findRepeatNumber(vector<int>& nums) {
@@ -78,12 +74,6 @@ string replaceSpace(string s) {
 	return s;
 }
 
-struct ListNode {
-	int val;
-	ListNode * next;
-	ListNode(int x): val(x),next(NULL){}
-
-};
 //从尾到头打印链表
 vector<int> reversePrint(ListNode* head) {
 	vector<int> num;
@@ -123,11 +113,10 @@ TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
 	for (int i =0; i<size; i++) {
 		indexMap[inorder[i]] = i;
 	}
-	return build(preorder,0,size,inorder,0,size,indexMap);
+	return buildN(preorder,0,size,inorder,0,size,indexMap);
 }
 
-
-TreeNode* build(vector<int>& preorder,int pl,int pr, vector<int>& inorder,int il,int ir,map<int, int>& indexMap ) {
+TreeNode* buildN(vector<int>& preorder,int pl,int pr, vector<int>& inorder,int il,int ir,map<int, int>& indexMap ) {
 	cout<<pl<<":"<<pr<<"-"<<il<<":"<<ir<<endl;
 	if(pl==pr){
 		return NULL;
@@ -138,8 +127,44 @@ TreeNode* build(vector<int>& preorder,int pl,int pr, vector<int>& inorder,int il
 	tree->right= NULL;
 	int index = indexMap[root];
 	int num = index - il;
-	tree->left = build(preorder,pl+1,pl+num+1,inorder,il,index,indexMap);
-	tree->right = build(preorder,pl+num+1,pr,inorder,index+1,ir,indexMap);
+	tree->left = buildN(preorder,pl+1,pl+num+1,inorder,il,index,indexMap);
+	tree->right = buildN(preorder,pl+num+1,pr,inorder,index+1,ir,indexMap);
 	return tree;
 
 }
+//用两个栈实现队列
+
+class CQueue {
+	public:
+		stack<int> stack1;
+		stack<int> stack2;
+		CQueue() {
+		}
+
+		void appendTail(int value) {
+			stack1.push(value);
+		}
+		int deleteHead() {
+			if (stack2.size()>0){
+				int t = stack2.top();
+				stack2.pop();
+				return t;
+			}else {
+				while (stack1.size()>0){
+					int t = stack1.top();
+					stack1.pop();
+					stack2.push(t);
+				}
+				if (!stack2.empty()){
+					int t = stack2.top();
+					stack2.pop();
+					return t;
+				}
+				return -1;
+			}
+
+		}
+
+
+
+};
