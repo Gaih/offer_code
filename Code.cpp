@@ -1,5 +1,4 @@
 #include "offer_code.h"
-#include <stack>
 
 //数组中重复的数字
 int findRepeatNumber(vector<int>& nums) {
@@ -185,3 +184,41 @@ int fib(int n) {
 	}
 	return t2;
 }
+//旋转数组的最小数字
+int minArray(vector<int>& numbers) {
+	int start = 0;
+	int end = numbers.size()-1;
+	int mid = (end + start)/2;
+	while (start<end) {
+		if (numbers[start]<numbers[end]){
+			return numbers[start];
+		}
+		if (end - start ==1){
+			mid = end;
+			break;
+		}
+
+		if (numbers[mid] == numbers[start] && numbers[start] == numbers[end]){
+			return findMin(numbers);
+		}
+		if (numbers[mid]>=numbers[start]){
+			start = mid;
+		}else if (numbers[mid]<=numbers[end]) {
+			end = mid;
+		}
+		mid = (end+start)/2;
+	}
+	return numbers[mid];
+
+}
+
+int findMin(vector<int> numbers){
+	int num = numbers[0];
+	for(int i = 1;i<numbers.size();i++){
+		if(numbers[i]<num){
+			num = numbers[i];
+		}
+	}
+	return num;
+}
+
