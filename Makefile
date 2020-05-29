@@ -48,10 +48,10 @@ RM = /usr/bin/cmake -E remove -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/gaih/code/c++/offer_code
+CMAKE_SOURCE_DIR = /home/gai/code/c++/offer_code
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/gaih/code/c++/offer_code
+CMAKE_BINARY_DIR = /home/gai/code/c++/offer_code
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -80,9 +80,9 @@ edit_cache/fast: edit_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gaih/code/c++/offer_code/CMakeFiles /home/gaih/code/c++/offer_code/CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gai/code/c++/offer_code/CMakeFiles /home/gai/code/c++/offer_code/CMakeFiles/progress.marks
 	$(MAKE) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/gaih/code/c++/offer_code/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/gai/code/c++/offer_code/CMakeFiles 0
 .PHONY : all
 
 # The main clean target
@@ -123,6 +123,33 @@ offer_code/fast:
 	$(MAKE) -f CMakeFiles/offer_code.dir/build.make CMakeFiles/offer_code.dir/build
 .PHONY : offer_code/fast
 
+Code.o: Code.cpp.o
+
+.PHONY : Code.o
+
+# target to build an object file
+Code.cpp.o:
+	$(MAKE) -f CMakeFiles/offer_code.dir/build.make CMakeFiles/offer_code.dir/Code.cpp.o
+.PHONY : Code.cpp.o
+
+Code.i: Code.cpp.i
+
+.PHONY : Code.i
+
+# target to preprocess a source file
+Code.cpp.i:
+	$(MAKE) -f CMakeFiles/offer_code.dir/build.make CMakeFiles/offer_code.dir/Code.cpp.i
+.PHONY : Code.cpp.i
+
+Code.s: Code.cpp.s
+
+.PHONY : Code.s
+
+# target to generate assembly for a file
+Code.cpp.s:
+	$(MAKE) -f CMakeFiles/offer_code.dir/build.make CMakeFiles/offer_code.dir/Code.cpp.s
+.PHONY : Code.cpp.s
+
 main.o: main.cpp.o
 
 .PHONY : main.o
@@ -159,6 +186,9 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... edit_cache"
 	@echo "... offer_code"
+	@echo "... Code.o"
+	@echo "... Code.i"
+	@echo "... Code.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

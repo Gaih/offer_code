@@ -254,3 +254,47 @@ bool dfs(vector<vector<char>> & board, int m, int n, string word, int index) {
     }
     return false;
 }
+
+
+//机器人运动范围
+int movingCount(int m, int n, int k) {
+    int s = 0;
+    map<string, int> maps;
+    move(0, 0, k, s, maps, m - 1, n - 1);
+    return s;
+
+
+}
+
+int move(int m, int n, int k, int & s, map<string, int>& maps, int mt, int nt) {
+    string t = to_string(m) + "-" + to_string(n);
+    if(maps.find(t) != maps.end()) {
+        return s;
+
+    }
+    if (m > mt || n > nt) {
+        return s;
+
+    }
+    if (sum(m, n) <= k) {
+        s++;
+        maps[t] = 1;
+        move(m, n + 1, k, s, maps, mt, nt);
+        move(m + 1, n, k, s, maps, mt, nt);
+
+    }
+
+    return s;
+
+}
+
+int sum(int m, int n) {
+    int s = 0;
+    s += (m / 10);
+    s += (m % 10);
+    s += (n / 10);
+    s += (n % 10);
+    return s;
+
+
+}
