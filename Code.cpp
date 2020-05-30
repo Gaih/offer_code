@@ -1,4 +1,6 @@
 #include "offer_code.h"
+#include <algorithm>
+#include <vector>
 
 //数组中重复的数字
 int findRepeatNumber(vector<int>& nums) {
@@ -295,6 +297,21 @@ int sum(int m, int n) {
     s += (n / 10);
     s += (n % 10);
     return s;
+}
+
+//剪绳子
+int cuttingRope(int n) {
+    vector<int> dp(n+1, 0);
+    dp[0] = 1;
+    dp[1] = 1;
+    dp[2] = 1;
+
+    for (int i = 1; i < n; i++) {
+        for (int j = i; j <= n; j++) {
+            dp[j] = max(dp[j], dp[j-i] * i);
+        }
+    }
+    return  dp[n];
 
 
 }
