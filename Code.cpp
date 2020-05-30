@@ -301,17 +301,27 @@ int sum(int m, int n) {
 
 //剪绳子
 int cuttingRope(int n) {
-    vector<int> dp(n+1, 0);
+    vector<int> dp(n + 1, 0);
     dp[0] = 1;
     dp[1] = 1;
     dp[2] = 1;
 
     for (int i = 1; i < n; i++) {
         for (int j = i; j <= n; j++) {
-            dp[j] = max(dp[j], dp[j-i] * i);
+            dp[j] = max(dp[j], dp[j - i] * i);
         }
     }
     return  dp[n];
 
 
+}
+//二进制中1的个数
+int hammingWeight(uint32_t n) {
+    int num = 0;
+    while (n != 0) {
+        num += n & 1;
+        n >>= 1;
+
+    }
+    return num;
 }
