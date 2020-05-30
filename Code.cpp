@@ -325,3 +325,23 @@ int hammingWeight(uint32_t n) {
     }
     return num;
 }
+//数组的整数次方
+double myPow(double x, int n) {
+    if (n == 1) {
+        return x;
+    }
+    double sum = 1;
+    long b = n;
+    if (b < 0) {
+        b = -b;
+        x = 1 / x;
+    }
+    while(b > 0) {
+        if (b & 1) {
+            sum *= x;
+        }
+        b /= 2;
+        x *= x;
+    }
+    return sum;
+}
