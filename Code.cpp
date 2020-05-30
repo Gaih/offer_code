@@ -345,3 +345,19 @@ double myPow(double x, int n) {
     }
     return sum;
 }
+//打印从1到最大的n位数
+vector<int> printNumbers(int n) {
+    int sum = 1;
+    for(int i = 0; i < n; i++) {
+        sum *= 10;
+
+    }
+    vector<int> s;
+    for(int i = 1; i < sum; i++) {
+        s.push_back(i);
+
+    }
+    return s;
+
+
+}
