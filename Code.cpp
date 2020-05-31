@@ -361,3 +361,25 @@ vector<int> printNumbers(int n) {
 
 
 }
+//删除链表的节点
+ListNode* deleteNode(ListNode* head, int val) {
+    ListNode* final = new ListNode(0);
+    ListNode* newhead = final;
+    while(head != NULL) {
+        if (head->val == val) {
+            head = head->next;
+            continue;
+
+        }
+        ListNode *t = new ListNode(0);
+        t->val = head->val;
+        t->next = NULL;
+        newhead->next = t;
+        newhead = newhead->next;
+
+        head = head->next;
+
+    }
+    return final->next;
+
+}
