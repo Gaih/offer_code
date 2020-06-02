@@ -468,3 +468,34 @@ ListNode* mergeTwoLists(ListNode* l1, ListNode* l2) {
     }
 
 }
+//树的子结构
+bool isSubStructure(TreeNode* A, TreeNode* B) {
+    if (A == NULL || B == NULL) {
+        return false;
+
+    }
+    bool c = false;
+    while(A != NULL) {
+        if (A->val == B->val) {
+            c = judge(A, B);
+
+        }
+        return isSubStructure(A->left, B) || isSubStructure(A->right, B) || c;
+
+    }
+    return false;
+
+
+}
+bool judge(TreeNode* A, TreeNode * B) {
+    if (B == NULL) {
+        return true;
+
+    }
+    if (A == NULL || A->val != B->val) {
+        return false;
+
+    }
+    return judge(A->left, B->left) && judge(A->right, B->right);
+
+}
