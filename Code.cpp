@@ -437,3 +437,19 @@ void exchange(vector<int>& nums, int start, int end) {
         exchange(nums, start + 1, end - 1);
     }
 }
+//链表倒数第k个节点
+ListNode* getKthFromEnd(ListNode* head, int k) {
+    ListNode * first = head;
+    ListNode * sec = head;
+    int n = 0;
+    while(first != NULL) {
+        first = first->next;
+        if (n >= k) {
+            sec = sec->next;
+
+        }
+        n++;
+
+    }
+    return sec;
+}
