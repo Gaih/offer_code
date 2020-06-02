@@ -414,3 +414,26 @@ bool isMatch(string s, string p) {
     }
     return dp[m][n];
 }
+//调整数组顺序使奇数位于前面
+vector<int> exchange(vector<int>& nums) {
+    int start = 0;
+    int end = nums.size() - 1;
+    exchange(nums, start, end);
+    return nums;
+}
+
+void exchange(vector<int>& nums, int start, int end) {
+    if(start >= end) {
+        return;
+    }
+    while (nums[start] % 2 != 0 && start < end) {
+        start++;
+    }
+    while(nums[end] % 2 == 0 && end > start) {
+        end--;
+    }
+    if (start < end) {
+        swap(nums[start], nums[end]);
+        exchange(nums, start + 1, end - 1);
+    }
+}
