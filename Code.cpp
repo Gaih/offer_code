@@ -499,3 +499,27 @@ bool judge(TreeNode* A, TreeNode * B) {
     return judge(A->left, B->left) && judge(A->right, B->right);
 
 }
+//全排列
+vector<vector<int>> permute(vector<int>& nums) {
+    vector<vector<int>> res;
+    vector<int> temp;
+    map<int, int>track;
+    backtrack(nums, track, temp, res);
+    return res;
+}
+void backtrack(vector<int> & nums, map<int, int>&track, vector<int>& temp, vector<vector<int>>& res) {
+    if (temp.size() == nums.size()) {
+        res.push_back(temp);
+        return;
+    }
+    for(int i = 0; i < nums.size(); i++) {
+        if (track.find(nums[i]) != track.end()) {
+            continue;
+        }
+        temp.push_back(nums[i]);
+        track[nums[i]] = 1;
+        backtrack(nums, track, temp, res);
+        temp.pop_back();
+        track.erase(nums[i]);
+    }
+}
