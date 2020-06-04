@@ -523,3 +523,59 @@ void backtrack(vector<int> & nums, map<int, int>&track, vector<int>& temp, vecto
         track.erase(nums[i]);
     }
 }
+//8皇后
+vector<vector<string>> solveNQueens(int n) {
+    vector<vector<string>> res;
+    vector<string> board(n, string(n, '.'));
+    trackback(board, res, 0);
+    return res;
+
+
+}
+
+void trackback(vector<string>& board, vector<vector<string>>& res, int row) {
+    if(row >= board.size()) {
+        res.push_back(board);
+        return;
+    }
+
+    int n = board[0].size();
+    for(int col = 0; col < n; col++) {
+        if (isValid(board, row, col)) {
+            continue;
+        }
+        board[row][col] = 'Q';
+        trackback(board, res, row + 1);
+        board[row][col] = '.';
+    }
+
+}
+
+bool isValid(vector<string> board, int row, int col) {
+    int length = board.size();
+    int width = board[0].size();
+    for(int i = 0; i < width; i++) {
+        if (board[i][col] == 'Q') {
+            return true;
+        }
+    }
+    int rows = row;
+    int cols = col;
+    while(rows > 0 && cols > 0) {
+        rows--;
+        cols--;
+        if (board[rows][cols] == 'Q') {
+            return true;
+        }
+
+    }
+    while(row > 0 && col < width - 1) {
+        row--;
+        col++;
+        if (board[row][col] == 'Q') {
+            return true;
+        }
+
+    }
+    return false;
+}
