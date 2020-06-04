@@ -591,3 +591,49 @@ TreeNode* mirrorTree(TreeNode* root) {
     cp->right = mirrorTree(root->left);
     return cp;
 }
+//顺时针打印矩阵
+vector<int> spiralOrder(vector<vector<int>>& matrix) {
+    vector<int> nums;
+    if (matrix.size() == 0) {
+        return nums;
+    }
+    int left = 0;
+    int right = matrix[0].size() - 1;
+    int top = 0;
+    int down = matrix.size() - 1;
+    while(true) {
+        if(left > right && top > down) {
+            break;
+        }
+        if(left > right) {
+            break;
+        }
+        for(int i = left; i <= right; i++) {
+            nums.push_back(matrix[top][i]);
+        }
+        top++;
+        if (top > down) {
+            break;
+        }
+        for(int i = top; i <= down; i++) {
+            nums.push_back(matrix[i][right]);
+        }
+        right--;
+
+        if(right < left) {
+            break;
+        }
+        for(int i = right; i >= left; i--) {
+            nums.push_back(matrix[down][i]);
+        }
+        down--;
+        if (down < top) {
+            break;
+        }
+        for(int i = down; i >= top; i--) {
+            nums.push_back(matrix[i][left]);
+        }
+        left++;
+    }
+    return nums;
+}
