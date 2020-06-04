@@ -579,3 +579,15 @@ bool isValid(vector<string> board, int row, int col) {
     }
     return false;
 }
+//二叉树的镜像
+TreeNode* mirrorTree(TreeNode* root) {
+    if (root == NULL) {
+        return NULL;
+
+    }
+    TreeNode* cp = new TreeNode(0);
+    cp->val = root->val;
+    cp->left = mirrorTree(root->right);
+    cp->right = mirrorTree(root->left);
+    return cp;
+}
