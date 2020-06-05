@@ -637,3 +637,90 @@ vector<int> spiralOrder(vector<vector<int>>& matrix) {
     }
     return nums;
 }
+
+//暴力法 最长回文字串
+string longestPalindrome(string s) {
+    if (s.size() == 1) {
+        return s;
+    }
+    int length = s.size() - 1;
+    int left = 0;
+    int right = length;
+    int maxleft = 0;
+    int max = 0;
+    for(int i = left; i <= length; i++) {
+        for(int j = right; j >= 0; j--) {
+            if (left >= right) {
+                break;
+            }
+            int t = 0;
+            equal(s, i, j, t);
+            // cout<<"i:"<<i<<"j:"<<j<<"t:"<<t<<endl;
+            if(t > max) {
+                maxleft = i;
+                max = t;
+            }
+        }
+    }
+    // cout<<maxleft<<endl;
+    // cout<<maxright<<endl;
+    if (max == 1) {
+        return s.substr(0, 1);
+    }
+    return s.substr(maxleft, max);
+
+}
+
+void equal(string s, int left, int right, int& max) {
+    if (left > right) {
+        return;
+    }
+    if (left == right) {
+        max++;
+        return;
+    }
+
+    if (s[left] == s[right]) {
+        max += 2;
+        equal(s, left + 1, right - 1, max);
+        return;
+    }
+    max = 1;
+    return ;
+}
+//动态规划
+string longestPalindrome(string s) {
+    if (s.size() == 1) {
+        return s;
+
+    }
+    int n = s.size();
+    int left = 0;
+    int maxleft = 0;
+    int max = 1;
+
+    vector<vector<int>> dp(n, vector<int>(n));
+    for(int i = 0; i < n; i++) {
+        dp[i][i] = 1;
+
+    }
+    for(int i = 1; i < n; i++) {
+        for(int j = 0; j < i; j++) {
+            if (s[i] == s[j]) {
+                if (i - j < 3) {
+                    dp[i][j] = 1;
+
+                } else {
+                    dp[i][j] = dp[i - 1][j + 1];
+                }
+            } else {
+                dp[i][j] = 0;
+            }
+            if (dp[i][j] == 1 && i - j + 1 > max) {
+                max = i - j + 1;
+                left = j;
+            }
+        }
+    }
+    return s.substr(left, max);
+}
