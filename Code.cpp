@@ -760,3 +760,35 @@ vector<int> levelOrder(TreeNode* root) {
     }
     return res;
 }
+//从上到下打印二叉树2
+vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>> res;
+    if (root == NULL) {
+        return res;
+
+    }
+    queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()) {
+        int n = q.size();
+        vector<int> r;
+        for(int i = 0; i < n; i++) {
+            TreeNode * t = q.front();
+            r.push_back(t->val);
+            q.pop();
+            if (t->left != NULL) {
+                q.push(t->left);
+
+            }
+            if (t->right != NULL) {
+                q.push(t->right);
+
+            }
+
+        }
+        res.push_back(r);
+
+
+    }
+    return res;
+}
