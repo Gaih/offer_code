@@ -739,3 +739,24 @@ bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
     }
     return n == popped.size();
 }
+//从上到下打印二叉树
+vector<int> levelOrder(TreeNode* root) {
+    vector<int> res;
+    if (root == NULL) {
+        return res;
+    }
+    queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()) {
+        TreeNode * t = q.front();
+        res.push_back(t->val);
+        q.pop();
+        if (t->left != NULL) {
+            q.push(t->left);
+        }
+        if (t->right != NULL) {
+            q.push(t->right);
+        }
+    }
+    return res;
+}
