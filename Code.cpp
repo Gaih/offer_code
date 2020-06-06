@@ -792,3 +792,49 @@ vector<vector<int>> levelOrder(TreeNode* root) {
     }
     return res;
 }
+//从上到下打印二叉树3
+vector<vector<int>> levelOrder(TreeNode* root) {
+    vector<vector<int>> res;
+    if (root == NULL) {
+        return res;
+
+    }
+    int m = 0;
+    queue<TreeNode*> q;
+    q.push(root);
+    while(!q.empty()) {
+        int n = q.size();
+        vector<int> r;
+        for(int i = 0; i < n; i++) {
+            TreeNode * t = q.front();
+            r.push_back(t->val);
+            q.pop();
+            if (t->left != NULL) {
+                q.push(t->left);
+
+            }
+            if (t->right != NULL) {
+                q.push(t->right);
+
+            }
+
+        }
+        if (m % 2 == 1) {
+            reverse(r);
+
+        }
+        res.push_back(r);
+        m++;
+    }
+    return res;
+}
+
+void reverse(vector<int>& a) {
+    int temp = 0;
+    int n = a.size();
+    for (int i = 0; i < n / 2; ++i) {
+        temp = a[n - i - 1];
+        a[n - i - 1] = a[i];
+        a[i] = temp;
+    }
+}
