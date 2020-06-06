@@ -724,3 +724,18 @@ string longestPalindrome(string s) {
     }
     return s.substr(left, max);
 }
+
+//栈的压入弹出序列
+bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+    stack<int> mStack;
+    int n = 0;
+    for(int i = 0; i < popped.size(); i++) {
+        mStack.push(pushed[i]);
+        while (!mStack.empty() && mStack.top() == popped[n]) {
+            mStack.pop();
+            n++;
+        }
+
+    }
+    return n == popped.size();
+}
