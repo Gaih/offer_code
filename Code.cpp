@@ -838,3 +838,24 @@ void reverse(vector<int>& a) {
         a[i] = temp;
     }
 }
+//二叉搜索树的后序遍历
+bool verifyPostorder(vector<int>& postorder) {
+    return idBack(postorder, 0, postorder.size() - 1);
+}
+bool idBack(vector<int>&pos, int i, int j) {
+    if (i >= j) {
+        return true;
+    }
+    int p = i;
+    while(pos[p] < pos[j]) {
+        p++;
+
+    }
+    int m = p;
+    while(pos[p] > pos[j]) {
+        p++;
+
+    }
+    return p == j && idBack(pos, i, m - 1) && idBack(pos, m, j - 1);
+
+}
