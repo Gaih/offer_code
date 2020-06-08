@@ -838,3 +838,36 @@ void reverse(vector<int>& a) {
         a[i] = temp;
     }
 }
+//z型字变换
+string convert(string s, int numRows) {
+    if (numRows == 1 || numRows == 0) {
+        return s;
+
+    }
+    int size = s.size() - 1;
+    vector<string> res(numRows, "");
+    int c = 0;
+    int flag = true;
+    for(int i = 0; i <= size; i++) {
+        res[c] += (s[i]);
+        if (flag) {
+            c++;
+
+        } else {
+            c--;
+
+        }
+        if (c == numRows - 1 || c == 0) {
+            flag = !flag;
+
+        }
+
+
+    }
+    string sRevert;
+    for(int i = 0; i < res.size(); i++) {
+        sRevert += res[i];
+
+    }
+
+}
