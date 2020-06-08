@@ -857,5 +857,66 @@ bool idBack(vector<int>&pos, int i, int j) {
 
     }
     return p == j && idBack(pos, i, m - 1) && idBack(pos, m, j - 1);
+}
+//z型字变换
+string convert(string s, int numRows) {
+    if (numRows == 1 || numRows == 0) {
+        return s;
+
+    }
+    int size = s.size() - 1;
+    vector<string> res(numRows, "");
+    int c = 0;
+    int flag = true;
+    for(int i = 0; i <= size; i++) {
+        res[c] += (s[i]);
+        if (flag) {
+            c++;
+
+        } else {
+            c--;
+
+        }
+        if (c == numRows - 1 || c == 0) {
+            flag = !flag;
+
+        }
+
+
+    }
+    string sRevert;
+    for(int i = 0; i < res.size(); i++) {
+        sRevert += res[i];
+
+    }
+}
+vector<vector<int>> pathSum(TreeNode* root, int sum) {
+    int target = 0;
+    vector<vector<int>> res;
+    vector<int> numList(0);
+    compare(root, target, sum, numList, res);
+    return res;
+
+
+}
+
+void compare(TreeNode* tree, int target, int sum, vector<int> numList, vector<vector<int>>& res) {
+    if (tree != NULL) {
+        target += tree->val;
+        numList.push_back(tree->val);
+        if (target == sum) {
+            if (tree->left == NULL && tree->right == NULL) {
+                res.push_back(numList);
+                return;
+
+            }
+
+
+        }
+        compare(tree->left, target, sum, numList, res);
+        compare(tree->right, target, sum, numList, res);
+        return;
+
+    }
 
 }
