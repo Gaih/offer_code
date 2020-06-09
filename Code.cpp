@@ -950,3 +950,30 @@ Node* copyRandomList(Node* head) {
 
 
 }
+Node* treeToDoublyList(Node* root) {
+    if (root == NULL) {
+        return NULL;
+    }
+    Node* cur = nullptr;
+    Node* head = nullptr;
+    dfs(root, cur, head);
+    head->left = cur;
+    cur->right = head;
+    return head;
+}
+//中序遍历
+void dfs(Node* root, Node*& cur, Node*& head) {
+    if (root == NULL) {
+        return;
+    }
+    dfs(root->left, cur, head);
+    if (cur == NULL) {
+        head = root;
+        cur = root;
+    } else {
+        cur->right = root;
+        root->left = cur;
+        cur = root;
+    }
+    dfs(cur->right, cur, head);
+}
