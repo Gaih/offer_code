@@ -920,3 +920,33 @@ void compare(TreeNode* tree, int target, int sum, vector<int> numList, vector<ve
     }
 
 }
+//复杂链表的复制
+Node* copyRandomList(Node* head) {
+    if (head == NULL) {
+        return NULL;
+
+    }
+    unordered_map<Node*, Node*> um;
+    Node* t = head;
+    while(t != NULL) {
+        um[t] = new Node(t->val);
+        t = t->next;
+
+    }
+    t = head;
+    while(t != NULL) {
+        if (t->next) {
+            um[t]->next = um[t->next];
+
+        }
+        if (t->random) {
+            um[t]->random = um[t->random];
+
+        }
+        t = t->next;
+
+    }
+    return um[head];
+
+
+}
