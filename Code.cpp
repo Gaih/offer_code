@@ -977,3 +977,18 @@ void dfs(Node* root, Node*& cur, Node*& head) {
     }
     dfs(cur->right, cur, head);
 }
+
+//连续子数组的最大和
+int maxSubArray(vector<int>& nums) {
+    vector<int> sums(nums.size(), 0);
+    sums[0] = nums[0];
+    int res = sums[0];
+    for(int i = 1; i < nums.size(); i++) {
+        sums[i] = nums[i] + max(sums[i - 1], 0);
+        res = max(sums[i], res);
+
+    }
+    return res;
+
+
+}
