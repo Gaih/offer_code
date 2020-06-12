@@ -989,6 +989,69 @@ int maxSubArray(vector<int>& nums) {
 
     }
     return res;
-
-
 }
+//序列化二叉树
+class Codec {
+public:
+
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        if (root == NULL){
+            return "";
+        }
+        string str = "";
+        ser(root,str);
+        return str;
+        
+    }
+
+    void ser(TreeNode* root,string & str){
+        if (root == NULL){
+            str+="null,";
+        }else{
+            string val = to_string(root->val);
+            str+=val+",";
+            ser(root->left,str);
+            ser(root->right,str);
+        }
+        
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* deserialize(string data) {
+        queue<string> tList = split(data);
+        return deser(tList);
+        
+    }
+
+    TreeNode* deser(queue<string>& tList){
+        if(tList.size()==0){
+            return NULL;
+        }
+        if (tList.front() == "null"){
+            tList.pop();
+            return NULL;
+        }
+        
+        int val = stoi(tList.front());
+        TreeNode* t = new TreeNode(val);
+        tList.pop();
+        t->left = deser(tList);
+        t->right = deser(tList);
+        return t;
+    
+    }
+     
+    queue<string> split(string& data){
+        int start = 0;
+        queue<string> res;
+        while(true){
+            auto end = data.find(",",start);
+            if (end == string::npos)break;
+            res.push(data.substr(start,end-start));
+            start= end+1;
+        }
+        return move(res);
+    }
+
+};
