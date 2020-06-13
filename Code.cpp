@@ -996,62 +996,99 @@ public:
 
     // Encodes a tree to a single string.
     string serialize(TreeNode* root) {
-        if (root == NULL){
+        if (root == NULL) {
             return "";
         }
         string str = "";
-        ser(root,str);
+        ser(root, str);
         return str;
-        
+
     }
 
-    void ser(TreeNode* root,string & str){
-        if (root == NULL){
-            str+="null,";
-        }else{
+    void ser(TreeNode* root, string & str) {
+        if (root == NULL) {
+            str += "null,";
+        } else {
             string val = to_string(root->val);
-            str+=val+",";
-            ser(root->left,str);
-            ser(root->right,str);
+            str += val + ",";
+            ser(root->left, str);
+            ser(root->right, str);
         }
-        
+
     }
 
     // Decodes your encoded data to tree.
     TreeNode* deserialize(string data) {
         queue<string> tList = split(data);
         return deser(tList);
-        
+
     }
 
-    TreeNode* deser(queue<string>& tList){
-        if(tList.size()==0){
+    TreeNode* deser(queue<string>& tList) {
+        if(tList.size() == 0) {
             return NULL;
         }
-        if (tList.front() == "null"){
+        if (tList.front() == "null") {
             tList.pop();
             return NULL;
         }
-        
+
         int val = stoi(tList.front());
         TreeNode* t = new TreeNode(val);
         tList.pop();
         t->left = deser(tList);
         t->right = deser(tList);
         return t;
-    
+
     }
-     
-    queue<string> split(string& data){
+
+    queue<string> split(string& data) {
         int start = 0;
         queue<string> res;
-        while(true){
-            auto end = data.find(",",start);
+        while(true) {
+            auto end = data.find(",", start);
             if (end == string::npos)break;
-            res.push(data.substr(start,end-start));
-            start= end+1;
+            res.push(data.substr(start, end - start));
+            start = end + 1;
         }
         return move(res);
     }
 
 };
+//字符串的排列
+vector<string> permutation(string s) {
+
+    string x = "";
+    vector<string> res;
+    if (s == "") {
+        return res;
+
+    }
+    dfs(0, x, s, res);
+    return res;
+
+
+}
+
+void dfs(int n, string x, string& s, vector<string>& res) {
+    if (n == s.size()) {
+        res.push_back(x);
+        return;
+
+    }
+    map<char, int> tempMap;
+    for(int i = n; i < s.size(); i++) {
+        if (tempMap.find(s[i]) != tempMap.end()) {
+            continue;
+
+        }
+        tempMap[s[i]] = 1;
+        x.push_back(s[i]);
+        swap(s[n], s[i]);
+        dfs(n + 1, x, s, res);
+        swap(s[n], s[i]);
+        x.erase(x.end() - 1);
+
+    }
+
+}
