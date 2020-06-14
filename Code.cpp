@@ -1092,3 +1092,48 @@ void dfs(int n, string x, string& s, vector<string>& res) {
     }
 
 }
+//数组排成最小的数
+vector<int> getLeastNumbers(vector<int>& arr, int k) {
+    vector<int> nums;
+    int mid = arr[0];
+    find(arr, 0, arr.size() - 1, k);
+    return vector<int>(arr.begin(), arr.begin() + k);
+
+}
+void find(vector<int>& arr, int s, int e, int &k ) {
+    if (s >= e) {
+        return;
+
+    }
+    int start = s;
+    int end = e;
+    int mid = arr[start];
+    int temp = 0;
+    while(start < end) {
+        while(arr[end] >= mid && end > start) {
+            end--;
+
+        }
+        while(arr[start] <= mid && start < end) {
+            start++;
+
+        }
+        temp = arr[start];
+        arr[start] = arr[end];
+        arr[end] = temp;
+
+    }
+    arr[start] = arr[s];
+    arr[s] = temp;
+    if (start == k) {
+        return;
+
+    } else if(start > k) {
+        find(arr, s, start - 1, k);
+
+    } else {
+        find(arr, start + 1, e, k);
+
+    }
+
+}
