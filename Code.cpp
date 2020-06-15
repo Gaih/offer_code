@@ -1137,3 +1137,31 @@ void find(vector<int>& arr, int s, int e, int &k ) {
     }
 
 }
+//数字翻译成字符串
+int translateNum(int num) {
+    string s = to_string(num);
+    int n = s.size();
+    map<int, int> sum;
+    sum[0] = 1;
+    sum[1] = 2;
+    int temp = atoi(s.substr(0, 2).c_str());
+    if (temp > 25 || temp < 10) {
+        sum[1] = 1;
+
+    }
+    if(n == 1) {
+        return sum[0];
+    }
+    if (n == 2) {
+        return sum[1];
+    }
+    for(int i = 2; i < n; i++) {
+        int t = atoi(s.substr(i - 1, 2).c_str());
+        if (t >= 10 && t <= 25) {
+            sum[i] = sum[i - 1] + sum[i - 2];
+        } else {
+            sum[i] = sum[i - 1];
+        }
+    }
+    return sum[n - 1];
+}
