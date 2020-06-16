@@ -1190,3 +1190,31 @@ int maxValue(vector<vector<int>>& grid) {
     }
     return dp[n - 1][m - 1];
 }
+
+
+//丑数
+int nthUglyNumber(int n) {
+
+    vector<int> nums(n, 1);
+    int a = 0;
+    int b = 0;
+    int c = 0;
+    for(int i = 1; i < n; i++) {
+        int n1 = nums[a] * 2;
+        int n2 = nums[b] * 3;
+        int n3 = nums[c] * 5;
+
+        int t = min(min(n1, n2), n3);
+        if (t == n1) {
+            a++;
+        }
+        if (t == n2) {
+            b++;
+        }
+        if (t == n3) {
+            c++;
+        }
+        nums[i] = t;
+    }
+    return nums[n - 1];
+}
