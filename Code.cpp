@@ -1218,3 +1218,26 @@ int nthUglyNumber(int n) {
     }
     return nums[n - 1];
 }
+
+//排序数组中查找数字
+
+int search(vector<int>& nums, int target) {
+    int s1 = twofind(nums, target);
+    int s2 = twofind(nums, target - 1);
+    return s1 - s2;
+
+}
+
+int twofind(vector<int>& nums, int target) {
+    int left = 0;
+    int right = nums.size() - 1;
+    while(left <= right) {
+        int mid = (left + right) / 2;
+        if (nums[mid] <= target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return left;
+}
