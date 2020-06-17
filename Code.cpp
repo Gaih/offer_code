@@ -1241,3 +1241,17 @@ int twofind(vector<int>& nums, int target) {
     }
     return left;
 }
+//0到n中缺失的数字
+int missingNumber(vector<int>& nums) {
+    int left = 0;
+    int right = nums.size() - 1;
+
+    while(left <= right) {
+        if (nums[left] == left) {
+            left++;
+        } else {
+            right--;
+        }
+    }
+    return left;
+}
