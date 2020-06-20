@@ -1287,3 +1287,23 @@ vector<int> singleNumbers(vector<int>& nums) {
     return n;
 
 }
+//数组中数字出现的次数2
+int singleNumber(vector<int>& nums) {
+    int final = 0;
+    for(int i = 0; i < 32; i++) {
+        int temp = 0;
+        for(int n = 0; n < nums.size(); n++) {
+            if (nums[n] & (1 << i)) temp++;
+
+        }
+        temp = temp % 3;
+        if (temp != 0) {
+            final = final ^ (temp << i);
+
+        }
+
+    }
+    return final;
+
+
+}
