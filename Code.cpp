@@ -1307,3 +1307,34 @@ int singleNumber(vector<int>& nums) {
 
 
 }
+//和为s的连续正整数序列
+vector<vector<int>> findContinuousSequence(int target) {
+
+    int start = 1;
+    int end = 1;
+    int sum = 0;
+    vector<vector<int>> res;
+    while(start <= (target + 1) / 2) {
+        if (sum == target) {
+            vector<int> temp;
+            for(int i = start; i < end; i++) {
+                temp.push_back(i);
+
+            }
+            res.push_back(temp);
+            sum -= start;
+            start++;
+
+        } else if (sum > target) {
+            sum -= start;
+            start++;
+
+        } else {
+            sum += end;
+            end++;
+
+        }
+
+    }
+    return res;
+}
