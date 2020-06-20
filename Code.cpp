@@ -1255,3 +1255,35 @@ int missingNumber(vector<int>& nums) {
     }
     return left;
 }
+
+//数组中数字出现的次数
+vector<int> singleNumbers(vector<int>& nums) {
+    vector<int> n;
+    int k = 0;
+    for(auto num : nums) {
+        k = k ^ num;
+
+    }
+    int mask = 1;
+    while((k & mask) == 0) {
+        mask = mask << 1;
+
+    }
+
+    int a = 0;
+    int b = 0;
+    for(auto num : nums) {
+        if ((num & mask) == 0) {
+            a = a ^ num;
+
+        } else {
+            b = b ^ num;
+
+        }
+
+    }
+    n.push_back(a);
+    n.push_back(b);
+    return n;
+
+}
