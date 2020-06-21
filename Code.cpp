@@ -1366,3 +1366,20 @@ string reverseWords(string s) {
 
 
 }
+//左旋转字符串
+string reverseLeftWords(string s, int n) {
+    if (n >= s.size()) {
+        return s;
+    }
+    int len = s.size();
+    for(int i = 0; i < n / 2; i++) {
+        swap(s[i], s[n - 1 - i]);
+    }
+    for(int i = n; i < (len + n) / 2; i++) {
+        swap(s[i], s[len + n - i - 1]);
+    }
+    for(int i = 0; i < len / 2; i++) {
+        swap(s[i], s[len - i - 1]);
+    }
+    return s;
+}
