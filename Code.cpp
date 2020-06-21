@@ -1338,3 +1338,31 @@ vector<vector<int>> findContinuousSequence(int target) {
     }
     return res;
 }
+//翻转单词顺序
+string reverseWords(string s) {
+    int start = 0;
+    int end = 0;
+    vector<string> words;
+    while(end <= s.size()) {
+        if (s[end] == ' ' || end == s.size()) {
+            string word = s.substr(start, end - start);
+            if (word != "") {
+                cout << word << endl;
+                words.push_back(word);
+
+            }
+            start = end + 1;
+
+        }
+        end++;
+
+    }
+    string res;
+    for(int i = words.size() - 1; i >= 0; i--) {
+        res += words[i] + " ";
+
+    }
+    return res.substr(0, res.size() - 1);
+
+
+}
