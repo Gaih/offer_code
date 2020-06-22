@@ -1383,3 +1383,28 @@ string reverseLeftWords(string s, int n) {
     }
     return s;
 }
+//股票的最大利润
+int maxProfit(vector<int>& prices) {
+    if (prices.size() == 0) {
+        return 0;
+
+    }
+
+    int left = prices[0];
+    int right = prices[0];
+    int res = 0;
+    for(int i = 1; i < prices.size(); i++) {
+        right = prices[i];
+        if (right <= left) {
+            left = min(left, right);
+
+        } else {
+            res = max(res, (right - left));
+
+        }
+
+    }
+    return res;
+
+
+}
