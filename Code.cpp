@@ -1408,3 +1408,38 @@ int maxProfit(vector<int>& prices) {
 
 
 }
+
+vector<double> twoSum(int n) {
+    vector<vector<int>> dp(n + 1, vector<int>(6 * n + 1, 0));
+    for(int i = 1; i <= n; i++) {
+        for(int j = i; j <= 6 * i; j++) {
+            if (i == 1) {
+                dp[i][j] = 1;
+                continue;
+
+            } else {
+                for(int cur = 1; cur <= 6; cur++) {
+                    if (j - cur < 0) {
+                        break;
+
+                    }
+                    dp[i][j] += dp[i - 1][j - cur];
+
+                }
+
+            }
+
+
+        }
+
+    }
+
+    int all = pow(6, n);
+    vector<double> res;
+    for(int i = n; i <= 6 * n; i++) {
+        res.push_back(dp[n][i] * 1.0 / all);
+
+    }
+    return res;
+
+}
